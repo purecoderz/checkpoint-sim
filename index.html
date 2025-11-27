@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkpoint 02 - Piscine Exam</title>
+    <style>
+        :root {
+            --bg-body: #0d1117;
+            --bg-card: #161b22;
+            --bg-header: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-green: #238636;
+            --accent-blue: #58a6ff;
+            --tag-bg: #21262d;
+            --tag-border: #363b42;
+            --progress-bg: #21262d;
+            --progress-fill: #238636;
+            --code-bg: #0d1117;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        /* Header Style */
+        .top-bar {
+            background-color: var(--bg-header);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo span {
+            background: var(--text-main);
+            color: var(--bg-body);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            background-color: var(--border-color);
+            border-radius: 50%;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Views */
+        .view-section {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exam-header {
+            margin-bottom: 30px;
+        }
+
+        .exam-header h1 {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+        }
+
+        .exam-meta {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Level Cards */
+        .level-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .level-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .level-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255,255,255,0.02);
+        }
+
+        .level-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .grade-badge {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            background-color: rgba(56, 139, 253, 0.15);
+            color: #58a6ff;
+            padding: 4px 10px;
+            border-radius: 2em;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 139, 253, 0.4);
+        }
+
+        .level-body {
+            padding: 24px;
+        }
+
+        .description {
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Exercise Tags */
+        .exercise-pool {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .exercise-tag {
+            background-color: var(--tag-bg);
+            border: 1px solid var(--tag-border);
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .exercise-tag.go-file {
+            color: #79c0ff;
+        }
+
+        /* Detail View Styles */
+        .back-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .back-btn:hover {
+            color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .detail-header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255,255,255,0.02);
+            font-weight: 600;
+        }
+
+        .accordion-header:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: #0d1117;
+        }
+
+        .accordion-content.active {
+            padding: 20px;
+            max-height: 2000px; 
+            border-top: 1px solid var(--border-color);
+        }
+
+        .subject-text {
+            font-size: 0.95rem;
+            color: #c9d1d9;
+        }
+
+        .subject-text h3 {
+            color: var(--text-main);
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            font-size: 1rem;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.3em;
+        }
+
+        .subject-text h3:first-child {
+            margin-top: 0;
+        }
+
+        .subject-text code {
+            background-color: rgba(110, 118, 129, 0.4);
+            padding: 0.2em 0.4em;
+            border-radius: 6px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 85%;
+        }
+
+        .subject-text pre {
+            background-color: #0d1117;
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="logo" onclick="showDashboard()"><span>01</span> INTRA</div>
+        <div class="user-profile">
+            <span>Student</span>
+            <div class="avatar"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <!-- DASHBOARD VIEW -->
+        <div id="dashboard-view" class="view-section">
+            <div class="exam-header">
+                <h1>Checkpoint 02</h1>
+                <div class="exam-meta">
+                    <span>Duration: 04:00:00</span>
+                    <span>Status: <span style="color: #d29922;">In Progress</span></span>
+                </div>
+            </div>
+
+            <!-- Question 1 -->
+            <div class="level-card" onclick="openLevel(1)">
+                <div class="level-header">
+                    <span class="level-title">Question 1</span>
+                    <span class="grade-badge">Unlock Level</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">only1</span>
+                        <span class="exercise-tag">onlya</span>
+                        <span class="exercise-tag">onlyb</span>
+                        <span class="exercise-tag">onlyf</span>
+                        <span class="exercise-tag">onlyz</span>
+                        <span class="exercise-tag go-file">hello.go</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="level-card" onclick="openLevel(2)">
+                <div class="level-header">
+                    <span class="level-title">Question 2</span>
+                    <span class="grade-badge">Achieves 10%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">checknumber</span>
+                        <span class="exercise-tag">countalpha</span>
+                        <span class="exercise-tag">countcharacter</span>
+                        <span class="exercise-tag">printif</span>
+                        <span class="exercise-tag">printifnot</span>
+                        <span class="exercise-tag">rectperimeter</span>
+                        <span class="exercise-tag">retainfirsthalf</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="level-card" onclick="openLevel(3)">
+                <div class="level-header">
+                    <span class="level-title">Question 3</span>
+                    <span class="grade-badge">Achieves 20%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">cameltosnakecase</span>
+                        <span class="exercise-tag">digitlen</span>
+                        <span class="exercise-tag">firstword</span>
+                        <span class="exercise-tag">fishandchips</span>
+                        <span class="exercise-tag">gcd</span>
+                        <span class="exercise-tag">hashcode</span>
+                        <span class="exercise-tag">lastword</span>
+                        <span class="exercise-tag">repeatalpha</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="level-card" onclick="openLevel(4)">
+                <div class="level-header">
+                    <span class="level-title">Question 4</span>
+                    <span class="grade-badge">Achieves 35%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">findprevprime</span>
+                        <span class="exercise-tag">fromto</span>
+                        <span class="exercise-tag">iscapitalized</span>
+                        <span class="exercise-tag">itoa</span>
+                        <span class="exercise-tag">printmemory</span>
+                        <span class="exercise-tag">printrevcomb</span>
+                        <span class="exercise-tag">thirdtimeisacharm</span>
+                        <span class="exercise-tag">weareunique</span>
+                        <span class="exercise-tag">zipstring</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="level-card" onclick="openLevel(5)">
+                <div class="level-header">
+                    <span class="level-title">Question 5</span>
+                    <span class="grade-badge">Achieves 50%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">addprimesum</span>
+                        <span class="exercise-tag">canjump</span>
+                        <span class="exercise-tag">chunk</span>
+                        <span class="exercise-tag">concatalternate</span>
+                        <span class="exercise-tag">concatslice</span>
+                        <span class="exercise-tag">fprime</span>
+                        <span class="exercise-tag">hiddenp</span>
+                        <span class="exercise-tag">inter</span>
+                        <span class="exercise-tag">reversestrcap</span>
+                        <span class="exercise-tag">saveandmiss</span>
+                        <span class="exercise-tag">union</span>
+                        <span class="exercise-tag">wdmatch</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 6 -->
+            <div class="level-card" onclick="openLevel(6)">
+                <div class="level-header">
+                    <span class="level-title">Question 6</span>
+                    <span class="grade-badge">Achieves 65%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">fifthandskip</span>
+                        <span class="exercise-tag">notdecimal</span>
+                        <span class="exercise-tag">revconcatalternate</span>
+                        <span class="exercise-tag">slice</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 7 -->
+            <div class="level-card" onclick="openLevel(7)">
+                <div class="level-header">
+                    <span class="level-title">Question 7</span>
+                    <span class="grade-badge">Achieves 75%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">findpairs</span>
+                        <span class="exercise-tag">revwstr</span>
+                        <span class="exercise-tag">rostring</span>
+                        <span class="exercise-tag">wordflip</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAIL VIEW (Hidden by default) -->
+        <div id="detail-view" class="view-section hidden">
+            <button class="back-btn" onclick="showDashboard()">
+                <span>←</span> Back to Dashboard
+            </button>
+            <div class="detail-header">
+                <h1 id="detail-title">Question X</h1>
+                <p style="color: var(--text-muted);">Click on a question below to reveal the subject.</p>
+            </div>
+            <div id="questions-container">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data for all questions with prototypes
+        const questionsData = {
+            1: [
+                { 
+                    id: "only1", 
+                    desc: "Write a program that displays a '1' character on the standard output.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}" 
+                },
+                { 
+                    id: "onlya", 
+                    desc: "Write a program that displays a 'a' character on the standard output.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "onlyb", 
+                    desc: "Write a program that displays a 'b' character on the standard output.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "onlyf", 
+                    desc: "Write a program that displays a 'f' character on the standard output.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "onlyz", 
+                    desc: "Write a program that displays a 'z' character on the standard output.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "hello.go", 
+                    desc: "Write a program that displays 'Hello World!' followed by a newline.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                }
+            ],
+            2: [
+                { 
+                    id: "checknumber", 
+                    desc: "Write a function that prints 'positive', 'negative' or 'null' depending on the number input.",
+                    proto: "func CheckNumber(arg string)"
+                },
+                { 
+                    id: "countalpha", 
+                    desc: "Write a function that takes a string and returns the number of alphabetical characters in it.",
+                    proto: "func CountAlpha(s string) int"
+                },
+                { 
+                    id: "countcharacter", 
+                    desc: "Write a function that counts the occurrences of a specific character in a string.",
+                    proto: "func CountChar(str string, c rune) int"
+                },
+                { 
+                    id: "printif", 
+                    desc: "Write a function that prints the string if the length is greater than or equal to 3.",
+                    proto: "func PrintIf(str string)"
+                },
+                { 
+                    id: "printifnot", 
+                    desc: "Write a function that prints the string if the length is less than 3.",
+                    proto: "func PrintIfNot(str string)"
+                },
+                { 
+                    id: "rectperimeter", 
+                    desc: "Write a function that calculates and returns the perimeter of a rectangle given width and height. If w or h are negative, return -1.",
+                    proto: "func RectPerimeter(w, h int) int"
+                },
+                { 
+                    id: "retainfirsthalf", 
+                    desc: "Write a function that returns the first half of a string. If the length is odd, round down. If string is empty, return empty.",
+                    proto: "func RetainFirstHalf(str string) string"
+                }
+            ],
+            3: [
+                { 
+                    id: "cameltosnakecase", 
+                    desc: "Write a function that converts a CamelCase string to snake_case. Return the string as is if it is not CamelCase.",
+                    proto: "func CamelToSnakeCase(s string) string"
+                },
+                { 
+                    id: "digitlen", 
+                    desc: "Write a function that returns the length of a number (how many digits it has) in a given base.",
+                    proto: "func DigitLen(n, base int) int"
+                },
+                { 
+                    id: "firstword", 
+                    desc: "Write a function that returns the first word of a string. A word is a sequence of characters separated by spaces.",
+                    proto: "func FirstWord(s string) string"
+                },
+                { 
+                    id: "fishandchips", 
+                    desc: "Write a function that prints 'fish' if n is divisible by 2, 'chips' if by 3, 'fish and chips' if by both. If n is negative, print 'error: number is negative'.",
+                    proto: "func FishAndChips(n int)"
+                },
+                { 
+                    id: "gcd", 
+                    desc: "Write a function that returns the Greatest Common Divisor of two integers.",
+                    proto: "func Gcd(a, b uint) uint"
+                },
+                { 
+                    id: "hashcode", 
+                    desc: "Write a function that returns a hashed string. The hash is computed by adding the ascii value of each char with the ascii value of the length of the string modulo 127.",
+                    proto: "func HashCode(dec string) string"
+                },
+                { 
+                    id: "lastword", 
+                    desc: "Write a function that returns the last word of a string.",
+                    proto: "func LastWord(s string) string"
+                },
+                { 
+                    id: "repeatalpha", 
+                    desc: "Write a function that returns a new string where each alphabetical character is repeated based on its index (a=1, b=2...).",
+                    proto: "func RepeatAlpha(s string) string"
+                }
+            ],
+            4: [
+                { 
+                    id: "findprevprime", 
+                    desc: "Write a function that returns the first prime number previous to the number given as argument. If there is no previous prime, return 0.",
+                    proto: "func FindPrevPrime(nb int) int"
+                },
+                { 
+                    id: "fromto", 
+                    desc: "Write a function that returns a string showing integers from A to B (inclusive) separated by ', '.",
+                    proto: "func FromTo(from int, to int) string"
+                },
+                { 
+                    id: "iscapitalized", 
+                    desc: "Write a function that returns true if each word in the string begins with a capital letter or is non-alphanumeric.",
+                    proto: "func IsCapitalized(s string) bool"
+                },
+                { 
+                    id: "itoa", 
+                    desc: "Write a function that converts a number to a string (equivalent to strconv.Itoa).",
+                    proto: "func Itoa(n int) string"
+                },
+                { 
+                    id: "printmemory", 
+                    desc: "Write a function that displays the memory of a slice in hex format.",
+                    proto: "func PrintMemory(arr [10]byte)"
+                },
+                { 
+                    id: "printrevcomb", 
+                    desc: "Write a program that prints all combinations of three different digits in descending order (987, 986... 021, 012).",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "thirdtimeisacharm", 
+                    desc: "Write a function that returns the third string passed to it. If there are fewer than 3 arguments, return a newline.",
+                    proto: "func ThirdTimeIsACharm(str string) string"
+                },
+                { 
+                    id: "weareunique", 
+                    desc: "Write a function that returns the number of unique characters that appear in both strings combined (if a char is in both, it's not unique).",
+                    proto: "func WeAreUnique(str1, str2 string) int"
+                },
+                { 
+                    id: "zipstring", 
+                    desc: "Write a function that groups consecutive identical characters and counts them (e.g., 'aaabb' -> '3a2b').",
+                    proto: "func ZipString(s string) string"
+                }
+            ],
+            5: [
+                { 
+                    id: "addprimesum", 
+                    desc: "Write a program that takes a positive integer as argument and displays the sum of all prime numbers inferior or equal to it.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "canjump", 
+                    desc: "Write a function that determines if you can reach the last index of an array by jumping. Each element represents the max jump length at that position.",
+                    proto: "func CanJump(steps []uint) bool"
+                },
+                { 
+                    id: "chunk", 
+                    desc: "Write a function that splits a slice into chunks of a given size and prints them.",
+                    proto: "func Chunk(slice []int, size int) {\n    // ...\n}"
+                },
+                { 
+                    id: "concatalternate", 
+                    desc: "Write a function that returns a new slice with items of two slices alternated. If one is shorter, append the rest of the longer one.",
+                    proto: "func ConcatAlternate(slice1, slice2 []int) []int"
+                },
+                { 
+                    id: "concatslice", 
+                    desc: "Write a function that concatenates two slices.",
+                    proto: "func ConcatSlice(slice1, slice2 []int) []int"
+                },
+                { 
+                    id: "fprime", 
+                    desc: "Write a program that takes a positive integer and displays its prime factors, followed by a newline.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "hiddenp", 
+                    desc: "Write a program that checks if the first string is hidden in the second string (characters in order, not necessarily contiguous).",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "inter", 
+                    desc: "Write a program that displays the common characters between two strings, without duplicates, in the order they appear in the first string.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "reversestrcap", 
+                    desc: "Write a program that capitalizes the last letter of each word and lowercases the rest.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "saveandmiss", 
+                    desc: "Write a function that keeps N chars and skips M chars in a string until the end.",
+                    proto: "func SaveAndMiss(arg string, num int) string"
+                },
+                { 
+                    id: "union", 
+                    desc: "Write a program that displays characters that appear in either string, without duplicates, in the order they appear.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "wdmatch", 
+                    desc: "Write a program that checks if a string can be formed by characters in another string in order.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                }
+            ],
+            6: [
+                { 
+                    id: "fifthandskip", 
+                    desc: "Write a function that takes a string and replaces every 5th character with a space,. If the string is empty or shorter than 5, return 'Invalid Input'.",
+                    proto: "func FifthAndSkip(str string) string"
+                },
+                { 
+                    id: "notdecimal", 
+                    desc: "Write a function that checks if a string contains non-decimal characters (not 0-9). Return true if it has non-decimals.",
+                    proto: "func NotDecimal(str string) bool"
+                },
+                { 
+                    id: "revconcatalternate", 
+                    desc: "Write a function that reverses two slices and then alternates them.",
+                    proto: "func RevConcatAlternate(slice1, slice2 []int) []int"
+                },
+                { 
+                    id: "slice", 
+                    desc: "Write a function that works like the slice operator in Go. It accepts a slice of strings and variadic ints for start/end.",
+                    proto: "func Slice(a []string, nbrs ...int) []string"
+                }
+            ],
+            7: [
+                { 
+                    id: "findpairs", 
+                    desc: "Write a program that finds pairs of numbers in an array that sum up to a target value.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "revwstr", 
+                    desc: "Write a program that takes a string and prints the words in reverse order.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "rostring", 
+                    desc: "Write a program that rotates the first word of a string to the end and displays the result.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                { 
+                    id: "wordflip", 
+                    desc: "Write a function that reverses the order of words in a string, but keeps the words themselves intact.",
+                    proto: "func WordFlip(str string) string"
+                }
+            ]
+        };
+
+        function showDashboard() {
+            document.getElementById('dashboard-view').classList.remove('hidden');
+            document.getElementById('detail-view').classList.add('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function openLevel(level) {
+            document.getElementById('dashboard-view').classList.add('hidden');
+            document.getElementById('detail-view').classList.remove('hidden');
+            document.getElementById('detail-title').innerText = "Question " + level;
+            
+            const container = document.getElementById('questions-container');
+            container.innerHTML = ''; // Clear previous
+
+            const questions = questionsData[level] || [];
+
+            questions.forEach((q, index) => {
+                const item = document.createElement('div');
+                item.className = 'accordion-item';
+                
+                const fullSubject = `
+                    <h3>Instructions</h3>
+                    <p>${q.desc}</p>
+                    
+                    <h3>Expected Function / Program</h3>
+                    <pre><code class="language-go">${q.proto}</code></pre>
+                    
+                    <h3>Usage Example</h3>
+                    <pre>$ go run . 
+(Output depends on specific logic...)</pre>
+                `;
+
+                item.innerHTML = `
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        ${q.id}
+                        <span style="font-size: 0.8em; color: var(--text-muted);">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="subject-text">
+                            ${fullSubject}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+            window.scrollTo(0,0);
+        }
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isActive = content.classList.contains('active');
+            
+            // Close all others
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                c.classList.remove('active');
+            });
+
+            // Toggle clicked
+            if (!isActive) {
+                content.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
