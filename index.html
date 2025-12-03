@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,14 +87,21 @@
             display: block;
             animation: fadeIn 0.3s ease-in-out;
         }
-        
+
         .hidden {
             display: none !important;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .exam-header {
@@ -119,7 +127,7 @@
             border-radius: 6px;
             margin-bottom: 24px;
             overflow: hidden;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, border-color 0.2s;
             cursor: pointer;
         }
@@ -135,7 +143,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(255,255,255,0.02);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .level-title {
@@ -201,7 +209,7 @@
             gap: 5px;
             font-size: 0.9rem;
         }
-        
+
         .back-btn:hover {
             color: var(--text-main);
             border-color: var(--text-main);
@@ -227,12 +235,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgba(255,255,255,0.02);
+            background-color: rgba(255, 255, 255, 0.02);
             font-weight: 600;
         }
 
         .accordion-header:hover {
-            background-color: rgba(255,255,255,0.05);
+            background-color: rgba(255, 255, 255, 0.05);
         }
 
         .accordion-content {
@@ -245,7 +253,7 @@
 
         .accordion-content.active {
             padding: 20px;
-            max-height: 2000px; 
+            max-height: 2000px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -284,9 +292,9 @@
             border-radius: 6px;
             border: 1px solid var(--border-color);
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="top-bar">
@@ -298,7 +306,7 @@
     </div>
 
     <div class="container">
-        
+
         <div id="dashboard-view" class="view-section">
             <div class="exam-header">
                 <h1>Checkpoint 02</h1>
@@ -441,6 +449,50 @@
                     </div>
                 </div>
             </div>
+
+            <div class="level-card" onclick="openLevel(8)">
+                <div class="level-header">
+                    <span class="level-title">Question 8</span>
+                    <span class="grade-badge">Achieves 85%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">itoabase</span>
+                        <span class="exercise-tag">options</span>
+                        <span class="exercise-tag">piglatin</span>
+                        <span class="exercise-tag">romannumbers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level-card" onclick="openLevel(9)">
+                <div class="level-header">
+                    <span class="level-title">Question 9</span>
+                    <span class="grade-badge">Achieves 95%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">brackets</span>
+                        <span class="exercise-tag">rpncalc</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level-card" onclick="openLevel(10)">
+                <div class="level-header">
+                    <span class="level-title">Question 10</span>
+                    <span class="grade-badge">Achieves 100%</span>
+                </div>
+                <div class="level-body">
+                    <div class="description">Click to view potential questions for this level</div>
+                    <div class="exercise-pool">
+                        <span class="exercise-tag">brainfuck</span>
+                        <span class="exercise-tag">grouping</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="detail-view" class="view-section hidden">
@@ -452,7 +504,7 @@
                 <p style="color: var(--text-muted);">Click on a question below to reveal the subject.</p>
             </div>
             <div id="questions-container">
-                </div>
+            </div>
         </div>
 
     </div>
@@ -461,267 +513,313 @@
         // Data for all questions with prototypes updated based on your provided solutions
         const questionsData = {
             1: [
-                { 
-                    id: "only1", 
+                {
+                    id: "only1",
                     desc: "Write a program that displays a '1' character on the standard output.",
-                    proto: "package main\n\nfunc main() {\n    // ...\n}" 
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "onlya", 
+                {
+                    id: "onlya",
                     desc: "Write a program that displays a 'a' character on the standard output.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "onlyb", 
+                {
+                    id: "onlyb",
                     desc: "Write a program that displays a 'b' character on the standard output.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "onlyf", 
+                {
+                    id: "onlyf",
                     desc: "Write a program that displays a 'f' character on the standard output.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "onlyz", 
+                {
+                    id: "onlyz",
                     desc: "Write a program that displays a 'z' character on the standard output.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "hello.go", 
+                {
+                    id: "hello.go",
                     desc: "Write a program that displays 'Hello World!' followed by a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 }
             ],
             2: [
-                { 
-                    id: "checknumber", 
+                {
+                    id: "checknumber",
                     desc: "Write a function that returns true if the string passed as argument contains at least one digit (0-9), otherwise returns false.",
                     proto: "func CheckNumber(arg string) bool"
                 },
-                { 
-                    id: "countalpha", 
+                {
+                    id: "countalpha",
                     desc: "Write a function that takes a string and returns the number of alphabetical characters (a-z, A-Z) in it.",
                     proto: "func CountAlpha(s string) int"
                 },
-                { 
-                    id: "countcharacter", 
+                {
+                    id: "countcharacter",
                     desc: "Write a function that counts the occurrences of a specific character in a string.",
                     proto: "func CountChar(str string, c rune) int"
                 },
-                { 
-                    id: "printif", 
+                {
+                    id: "printif",
                     desc: "Write a function that prints 'G' followed by a newline if the string length is greater than or equal to 3. Otherwise, print 'invalid input'.",
                     proto: "func PrintIf(str string)"
                 },
-                { 
-                    id: "printifnot", 
+                {
+                    id: "printifnot",
                     desc: "Write a function that prints 'G' followed by a newline if the string length is less than 3. Otherwise, print 'invalid input'.",
                     proto: "func PrintIfNot(str string)"
                 },
-                { 
-                    id: "rectperimeter", 
+                {
+                    id: "rectperimeter",
                     desc: "Write a function that calculates and returns the perimeter of a rectangle given width and height. If w or h are negative or zero, return -1.",
                     proto: "func RectPerimeter(w, h int) int"
                 },
-                { 
-                    id: "retainfirsthalf", 
+                {
+                    id: "retainfirsthalf",
                     desc: "Write a function that returns the first half of a string (len/2). If the length is 1, return the string. If empty, return empty.",
                     proto: "func RetainFirstHalf(str string) string"
                 }
             ],
             3: [
-                { 
-                    id: "cameltosnakecase", 
+                {
+                    id: "cameltosnakecase",
                     desc: "Write a function that converts a CamelCase string to snake_case. Return the string as is if it is not valid CamelCase (contains numbers, symbols, trailing caps, or consecutive caps).",
                     proto: "func CamelToSnakeCase(s string) string"
                 },
-                { 
-                    id: "digitlen", 
+                {
+                    id: "digitlen",
                     desc: "Write a function that returns the length of a number (how many digits it has) in a given base (2-36). Return -1 if base is invalid. Handle negative numbers as positive.",
                     proto: "func DigitLen(n, base int) int"
                 },
-                { 
-                    id: "firstword", 
+                {
+                    id: "firstword",
                     desc: "Write a function that returns the first word of a string followed by a newline. A word is a sequence of characters separated by spaces.",
                     proto: "func FirstWord(s string) string"
                 },
-                { 
-                    id: "fishandchips", 
+                {
+                    id: "fishandchips",
                     desc: "Write a function that prints: 'fish' if n is divisible by 2, 'chips' if by 3, 'fish and chips' if by both. If n is negative, print 'number is negative'. If none, print 'non divisible'.",
                     proto: "func FishAndChips(n int)"
                 },
-                { 
-                    id: "gcd", 
+                {
+                    id: "gcd",
                     desc: "Write a function that returns the Greatest Common Divisor of two unsigned integers.",
                     proto: "func Gcd(a, b uint) uint"
                 },
-                { 
-                    id: "hashcode", 
+                {
+                    id: "hashcode",
                     desc: "Write a function that hashes a string: (ASCII + len) % 127. If result < 33, add 33. Return result string.",
                     proto: "func HashCode(dec string) string"
                 },
-                { 
-                    id: "lastword", 
+                {
+                    id: "lastword",
                     desc: "Write a function that returns the last word of a string followed by a newline.",
                     proto: "func LastWord(s string) string"
                 },
-                { 
-                    id: "repeatalpha", 
+                {
+                    id: "repeatalpha",
                     desc: "Write a function that returns a new string where each char is repeated based on its alphabet index (A=1, B=2...). Non-letters stay same.",
                     proto: "func RepeatAlpha(s string) string"
                 }
             ],
             4: [
-                { 
-                    id: "findprevprime", 
+                {
+                    id: "findprevprime",
                     desc: "Write a function that returns the first prime number previous to (or equal to) the number given as argument. If there is no prime <= nb (e.g. nb <= 2), return 0.",
                     proto: "func FindPrevPrime(nb int) int"
                 },
-                { 
-                    id: "fromto", 
+                {
+                    id: "fromto",
                     desc: "Write a function that returns a string showing integers from A to B (inclusive) separated by ', '. Digits must be 2 chars long (01, 02). Range 0-99. Return 'Invalid' if out of range.",
                     proto: "func FromTo(from int, to int) string"
                 },
-                { 
-                    id: "iscapitalized", 
+                {
+                    id: "iscapitalized",
                     desc: "Write a function that returns true if each word in the string begins with a capital letter or is non-alphanumeric.",
                     proto: "func IsCapitalized(s string) bool"
                 },
-                { 
-                    id: "itoa", 
+                {
+                    id: "itoa",
                     desc: "Write a function that converts a number to a string (equivalent to strconv.Itoa).",
                     proto: "func Itoa(n int) string"
                 },
-                { 
-                    id: "printmemory", 
+                {
+                    id: "printmemory",
                     desc: "Write a function that displays a 10-byte array in Hex (4, 4, 2 lines) followed by ASCII chars, using z01.PrintRune.",
                     proto: "func PrintMemory(arr [10]byte)"
                 },
-                { 
-                    id: "printrevcomb", 
+                {
+                    id: "printrevcomb",
                     desc: "Write a program that prints all combinations of three different digits in strictly descending order (e.g., '987, 986 ... 210').",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "thirdtimeisacharm", 
+                {
+                    id: "thirdtimeisacharm",
                     desc: "Write a function that returns a string containing every 3rd character of the input string. Always ends with a newline.",
                     proto: "func ThirdTimeIsACharm(str string) string"
                 },
-                { 
-                    id: "weareunique", 
+                {
+                    id: "weareunique",
                     desc: "Write a function that returns the count of characters unique to str1 (not in str2) plus characters unique to str2 (not in str1). Return -1 if both are empty.",
                     proto: "func WeAreUnique(str1, str2 string) int"
                 },
-                { 
-                    id: "zipstring", 
+                {
+                    id: "zipstring",
                     desc: "Write a function that groups consecutive identical characters and counts them (e.g., 'aaabb' -> '3a2b').",
                     proto: "func ZipString(s string) string"
                 }
             ],
             5: [
-                { 
-                    id: "addprimesum", 
-                    desc: "Write a program that takes a positive integer as argument and displays the sum of all prime numbers inferior or equal to it.",
+                {
+                    id: "addprimesum",
+                    desc: "Write a program that takes a positive integer as argument and displays the sum of all prime numbers inferior or equal to it followed by a newline. If the number of arguments is not 1, or if the argument is not a positive number, display 0 followed by a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "canjump", 
-                    desc: "Write a function that determines if you can reach the last index of an array by jumping. Each element represents the max jump length at that position.",
-                    proto: "func CanJump(steps []uint) bool"
+                {
+                    id: "canjump",
+                    desc: "Write a function that determines if it is possible to reach the last index of the slice starting from the first index. Each element represents the exact length of the jump. You fail if you land on 0 or jump beyond the last index.",
+                    proto: "func CanJump(nums []uint) bool"
                 },
-                { 
-                    id: "chunk", 
-                    desc: "Write a function that splits a slice into chunks of a given size and prints them.",
+                {
+                    id: "chunk",
+                    desc: "Write a function called Chunk that splits a slice into sub-slices of length size and displays the result. If size is 0 or less, display a newline. If the slice is empty, display [].",
                     proto: "func Chunk(slice []int, size int) {\n    // ...\n}"
                 },
-                { 
-                    id: "concatalternate", 
-                    desc: "Write a function that returns a new slice with items of two slices alternated. If one is shorter, append the rest of the longer one.",
+                {
+                    id: "concatalternate",
+                    desc: "Write a function that returns a new slice with items of two slices alternated. Start with the element of the larger slice (or slice1 if equal). Append remaining elements at the end.",
                     proto: "func ConcatAlternate(slice1, slice2 []int) []int"
                 },
-                { 
-                    id: "concatslice", 
-                    desc: "Write a function that concatenates two slices.",
+                {
+                    id: "concatslice",
+                    desc: "Write a function ConcatSlice that takes two slices of integers as arguments and returns a new slice containing the concatenation of the two slices.",
                     proto: "func ConcatSlice(slice1, slice2 []int) []int"
                 },
-                { 
-                    id: "fprime", 
-                    desc: "Write a program that takes a positive integer and displays its prime factors, followed by a newline.",
+                {
+                    id: "fprime",
+                    desc: "Write a program that takes a positive integer and displays its prime factors separated by * and followed by a newline. If the argument is invalid or <= 1, display a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "hiddenp", 
-                    desc: "Write a program that checks if the first string is hidden in the second string (characters in order, not necessarily contiguous).",
+                {
+                    id: "hiddenp",
+                    desc: "Write a program named hiddenp that checks if the first string is hidden in the second string. If it is, print 1 followed by a newline. If not, print 0 followed by a newline. If invalid arguments, do nothing.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "inter", 
-                    desc: "Write a program that displays the common characters between two strings, without duplicates, in the order they appear in the first string.",
+                {
+                    id: "inter",
+                    desc: "Write a program that displays the common characters between two strings, without duplicates, in the order they appear in the first string. If the number of arguments is not 2, display a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "reversestrcap", 
-                    desc: "Write a program that capitalizes the last letter of each word and lowercases the rest.",
+                {
+                    id: "reversestrcap",
+                    desc: "Write a program that takes one or more arguments and, for each argument, prints it with the last letter of each word capitalized and the rest in lowercase. If no arguments are provided, display a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "saveandmiss", 
-                    desc: "Write a function that keeps N chars and skips M chars in a string until the end.",
+                {
+                    id: "saveandmiss",
+                    desc: "Write a function that takes a string and an integer `num`. It keeps the first `num` characters, skips the next `num`, keeps the next `num`, and so on. If `num` <= 0, return the string as is.",
                     proto: "func SaveAndMiss(arg string, num int) string"
                 },
-                { 
-                    id: "union", 
-                    desc: "Write a program that displays characters that appear in either string, without duplicates, in the order they appear.",
+                {
+                    id: "union",
+                    desc: "Write a program that takes two strings and displays, without duplicates, the characters that appear in either one of them. Display them in the order of their appearance. If the number of arguments is not 2, display a newline.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "wdmatch", 
-                    desc: "Write a program that checks if a string can be formed by characters in another string in order.",
+                {
+                    id: "wdmatch",
+                    desc: "Write a program that takes two strings and checks if the first string can be formed by characters in the second string in order. If true, display the first string followed by a newline. Otherwise, display nothing.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 }
             ],
             6: [
-                { 
-                    id: "fifthandskip", 
+                {
+                    id: "fifthandskip",
                     desc: "Write a function that takes a string and replaces every 5th character with a space,. If the string is empty or shorter than 5, return 'Invalid Input'.",
                     proto: "func FifthAndSkip(str string) string"
                 },
-                { 
-                    id: "notdecimal", 
+                {
+                    id: "notdecimal",
                     desc: "Write a function that checks if a string contains non-decimal characters (not 0-9). Return true if it has non-decimals.",
                     proto: "func NotDecimal(str string) bool"
                 },
-                { 
-                    id: "revconcatalternate", 
+                {
+                    id: "revconcatalternate",
                     desc: "Write a function that reverses two slices and then alternates them.",
                     proto: "func RevConcatAlternate(slice1, slice2 []int) []int"
                 },
-                { 
-                    id: "slice", 
+                {
+                    id: "slice",
                     desc: "Write a function that works like the slice operator in Go. It accepts a slice of strings and variadic ints for start/end.",
                     proto: "func Slice(a []string, nbrs ...int) []string"
                 }
             ],
             7: [
-                { 
-                    id: "findpairs", 
+                {
+                    id: "findpairs",
                     desc: "Write a program that finds pairs of numbers in an array that sum up to a target value.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "revwstr", 
+                {
+                    id: "revwstr",
                     desc: "Write a program that takes a string and prints the words in reverse order.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "rostring", 
+                {
+                    id: "rostring",
                     desc: "Write a program that rotates the first word of a string to the end and displays the result.",
                     proto: "package main\n\nfunc main() {\n    // ...\n}"
                 },
-                { 
-                    id: "wordflip", 
+                {
+                    id: "wordflip",
                     desc: "Write a function that reverses the order of words in a string, but keeps the words themselves intact.",
                     proto: "func WordFlip(str string) string"
+                }
+            ],
+            8: [
+                {
+                    id: "itoabase",
+                    desc: "Write a function that converts an integer value to a string using the specified base (binary, octal, hex, etc).",
+                    proto: "func ItoaBase(value, base int) string"
+                },
+                {
+                    id: "options",
+                    desc: "Write a program that accepts command-line arguments (like '-abc') and sets bits in a 32-bit integer corresponding to the letters 'a'-'z'. Print the result as a binary string.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                {
+                    id: "piglatin",
+                    desc: "Write a program that transforms a string into Pig Latin. If a word starts with a vowel, add 'ay'. If it starts with consonants, move them to the end and add 'ay'.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                {
+                    id: "romannumbers",
+                    desc: "Write a program that converts a number to its Roman numeral representation (e.g., 20 -> XX).",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                }
+            ],
+            9: [
+                {
+                    id: "brackets",
+                    desc: "Write a program that checks if brackets '(', ')', '[', ']', '{', '}' are correctly nested and closed in the arguments.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                {
+                    id: "rpncalc",
+                    desc: "Write a program that evaluates mathematical expressions given in Reverse Polish Notation (RPN).",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                }
+            ],
+            10: [
+                {
+                    id: "brainfuck",
+                    desc: "Write a Brainfuck interpreter. It should simulate the standard Brainfuck language commands: > < + - . , [ ].",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
+                },
+                {
+                    id: "grouping",
+                    desc: "Write a program that finds and displays matches for a specific pattern (typically involving pipes '|' and brackets '()') in a string.",
+                    proto: "package main\n\nfunc main() {\n    // ...\n}"
                 }
             ]
         };
@@ -729,14 +827,14 @@
         function showDashboard() {
             document.getElementById('dashboard-view').classList.remove('hidden');
             document.getElementById('detail-view').classList.add('hidden');
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
 
         function openLevel(level) {
             document.getElementById('dashboard-view').classList.add('hidden');
             document.getElementById('detail-view').classList.remove('hidden');
             document.getElementById('detail-title').innerText = "Question " + level;
-            
+
             const container = document.getElementById('questions-container');
             container.innerHTML = ''; // Clear previous
 
@@ -745,7 +843,7 @@
             questions.forEach((q, index) => {
                 const item = document.createElement('div');
                 item.className = 'accordion-item';
-                
+
                 const fullSubject = `
                     <h3>Instructions</h3>
                     <p>${q.desc}</p>
@@ -775,15 +873,16 @@
 
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
-            
+
             // Close others
             const allContents = document.querySelectorAll('.accordion-content');
             allContents.forEach(c => {
-                if(c !== content) c.classList.remove('active');
+                if (c !== content) c.classList.remove('active');
             });
 
             content.classList.toggle('active');
         }
     </script>
 </body>
+
 </html>
