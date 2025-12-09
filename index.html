@@ -580,39 +580,133 @@
                 {
                     id: "checknumber",
                     desc: "Write a function that takes a string as an argument and returns true if the string contains any number, otherwise return false.",
-                    proto: "func CheckNumber(arg string) bool {"
+                    proto: "func CheckNumber(arg string) bool {",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.CheckNumber("123"))
+    fmt.Println(piscine.CheckNumber("H3llo"))
+    fmt.Println(piscine.CheckNumber("Hello"))
+}`,
+                    usageOutput: `true$
+true$
+false$`
                 },
                 {
                     id: "countalpha",
                     desc: "Write a function CountAlpha() that takes a string as an argument and returns the number of alphabetic characters in the string.",
-                    proto: "func CountAlpha(s string) int"
+                    proto: "func CountAlpha(s string) int",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.CountAlpha("Hello 123"))
+    fmt.Println(piscine.CountAlpha("H e l l o"))
+    fmt.Println(piscine.CountAlpha("12345"))
+}`,
+                    usageOutput: `5$
+5$
+0$`
                 },
                 {
                     id: "countcharacter",
                     desc: `write a function that takes a string and a character as arguments and returns the number of times the character appears in the string.
                             if the character is not in the string return 0
                             if the string is empty return 0`,
-                    proto: "func CountChar(str string, c rune) int"
+                    proto: "func CountChar(str string, c rune) int",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.CountChar("Hello World", 'l'))
+    fmt.Println(piscine.CountChar("5", '5'))
+    fmt.Println(piscine.CountChar("ola!", '4'))
+}`,
+                    usageOutput: `3$
+1$
+0$`
                 },
                 {
                     id: "printif",
                     desc: `Write a function that takes a string as an argument and returns the letter G followed by a newline \n if the argument length is more or equal than 3,
                              otherwise returns Invalid Input followed by a newline \\n.
                             If it's an empty string return G followed by a newline \\n.`,
-                    proto: "func PrintIf(str string) string"
+                    proto: "func PrintIf(str string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Print(piscine.PrintIf("abcdef"))
+    fmt.Print(piscine.PrintIf("abc"))
+    fmt.Print(piscine.PrintIf(""))
+    fmt.Print(piscine.PrintIf("14"))
+}`,
+                    usageOutput: `G$
+G$
+G$
+Invalid Input$`
                 },
                 {
                     id: "printifnot",
                     desc: `Write a function that takes a string and returns:
                             "G\n" if the string's length is less than 3 (including empty string).
                             "Invalid Input\n" otherwise.`,
-                    proto: "func PrintIfNot(str string)"
+                    proto: "func PrintIfNot(str string)",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Print(piscine.PrintIfNot("ab"))
+    fmt.Print(piscine.PrintIfNot("abc"))
+    fmt.Print(piscine.PrintIfNot(""))
+    fmt.Print(piscine.PrintIfNot("145"))
+}`,
+                    usageOutput: `G$
+Invalid Input$
+G$
+Invalid Input$`
                 },
                 {
                     id: "rectperimeter",
                     desc: `Write a function that takes two int's as arguments, representing the length of width and height of a rectangle and returning the perimeter of the rectangle.
                             If one of the arguments is negative it should return -1`,
-                    proto: "func RectPerimeter(w, h int) int"
+                    proto: "func RectPerimeter(w, h int) int",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.RectPerimeter(10, 2))
+    fmt.Println(piscine.RectPerimeter(434343, 13))
+    fmt.Println(piscine.RectPerimeter(10, -2))
+}`,
+                    usageOutput: `24$
+868712$
+-1$`
                 },
                 {
                     id: "retainfirsthalf",
@@ -620,7 +714,24 @@
                                 If the length of the string is odd, round it down.
                                 If the string is empty, return an empty string.
                                 If the string length is equal to one, return the string.`,
-                    proto: "func RetainFirstHalf(str string) string"
+                    proto: "func RetainFirstHalf(str string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.RetainFirstHalf("This is the 1st halfThis is the 2nd half"))
+    fmt.Println(piscine.RetainFirstHalf("A"))
+    fmt.Println(piscine.RetainFirstHalf(""))
+    fmt.Println(piscine.RetainFirstHalf("Hello World"))
+}`,
+                    usageOutput: `This is the 1st half$
+A$
+$
+Hello$`
                 }
             ],
             3: [
@@ -643,7 +754,24 @@
                         <li> Numbers or punctuation are not allowed in the word anywhere (camelCase1). </li>
                         </ul>
                     `,
-                    proto: "func CamelToSnakeCase(s string) string"
+                    proto: "func CamelToSnakeCase(s string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.CamelToSnakeCase("CamelCase"))
+    fmt.Println(piscine.CamelToSnakeCase("camelCase"))
+    fmt.Println(piscine.CamelToSnakeCase("CamelCase1"))
+    fmt.Println(piscine.CamelToSnakeCase("CamelCAse"))
+}`,
+                    usageOutput: `camel_case$
+camel_case$
+CamelCase1$
+CamelCAse$`
                 },
                 {
                     id: "digitlen",
@@ -651,13 +779,47 @@
                     <ol>
                         <li> The second int must be between 2 and 36. If not, the function returns -1. </li>
                         <li> If the first int is negative, reverse the sign and count the digits. </li> </ol>`, 
-                    proto: "func DigitLen(n, base int) int"
+                    proto: "func DigitLen(n, base int) int",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.DigitLen(100, 10))
+    fmt.Println(piscine.DigitLen(100, 2))
+    fmt.Println(piscine.DigitLen(-100, 16))
+    fmt.Println(piscine.DigitLen(100, -1))
+}`,
+                    usageOutput: `3$
+7$
+2$
+-1$`
                 },
                 {
                     id: "firstword",
                     desc: `Write a function that takes a string and return a string containing its first word, followed by a newline ('\n').
                             <ul><li>A word is a sequence of characters delimited by spaces or by the start/end of the argument.</li></ul>`,
-                    proto: "func FirstWord(s string) string"
+                    proto: "func FirstWord(s string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Print(piscine.FirstWord("Hello World"))
+    fmt.Print(piscine.FirstWord("I am a student"))
+    fmt.Print(piscine.FirstWord("a"))
+    fmt.Print(piscine.FirstWord("   lorem ipsum"))
+}`,
+                    usageOutput: `Hello$
+I$
+a$
+lorem$`
                 },
                 {
                     id: "fishandchips",
@@ -668,12 +830,48 @@
                             <li>If the number is divisible by 2 and 3, print fish and chips. </li>
                             <li>If the number is negative return error: number is negative. </li>
                             <li>If the number is non divisible by 2 or 3 return error: non divisible. </li> </ul>`,
-                    proto: "func FishAndChips(n int)"
+                    proto: "func FishAndChips(n int)",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.FishAndChips(4))
+    fmt.Println(piscine.FishAndChips(9))
+    fmt.Println(piscine.FishAndChips(6))
+    fmt.Println(piscine.FishAndChips(-2))
+    fmt.Println(piscine.FishAndChips(5))
+}`,
+                    usageOutput: `fish$
+chips$
+fish and chips$
+error: number is negative$
+error: non divisible$`
                 },
                 {
                     id: "gcd",
                     desc: "Write a function that takes two uint representing two strictly positive integers and returns their greatest common divisor. If any of the input numbers is 0, the function should return 0.",
-                    proto: "func Gcd(a, b uint) uint"
+                    proto: "func Gcd(a, b uint) uint",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.Gcd(42, 10))
+    fmt.Println(piscine.Gcd(42, 12))
+    fmt.Println(piscine.Gcd(14, 77))
+    fmt.Println(piscine.Gcd(17, 3))
+}`,
+                    usageOutput: `2$
+6$
+7$
+1$`
                 },
                 {
                     id: "hashcode",
@@ -684,19 +882,70 @@
                         (ASCII of current character + size of the string) % 127, ensuring the result falls within the ASCII range of 0 to 127.
 
                             <li>If the resulting character is unprintable add 33 to it. </li></ul>`,
-                    proto: "func HashCode(dec string) string"
+                    proto: "func HashCode(dec string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.HashCode("A"))
+    fmt.Println(piscine.HashCode("AB"))
+    fmt.Println(piscine.HashCode("Hello"))
+    fmt.Println(piscine.HashCode("123"))
+}`,
+                    usageOutput: `B$
+CD$
+Mjqqt$
+456$`
                 },
                 {
                     id: "lastword",
                     desc: `Write a function LastWord that takes a string and returns its last word followed by a \\n. <br>
                             <ul><li>A word is a section of string delimited by spaces or by the start/end of the string.</li></ul>`,
-                    proto: "func LastWord(s string) string"
+                    proto: "func LastWord(s string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Print(piscine.LastWord("Hello World"))
+    fmt.Print(piscine.LastWord("I am a student"))
+    fmt.Print(piscine.LastWord("a"))
+    fmt.Print(piscine.LastWord("   lorem ipsum   "))
+}`,
+                    usageOutput: `World$
+student$
+a$
+ipsum$`
                 },
                 {
                     id: "repeatalpha",
                     desc: `Write a function called RepeatAlpha that takes a string and displays it repeating each alphabetical character as many times as its alphabetical index. <br>
                             'a' becomes 'a', 'b' becomes 'bb', 'e' becomes 'eeeee', etc...`,
-                    proto: "func RepeatAlpha(s string) string"
+                    proto: "func RepeatAlpha(s string) string",
+                    usageCode: `package main
+
+import (
+    "fmt"
+    "piscine"
+)
+
+func main() {
+    fmt.Println(piscine.RepeatAlpha("abc"))
+    fmt.Println(piscine.RepeatAlpha("Choumi."))
+    fmt.Println(piscine.RepeatAlpha(""))
+    fmt.Println(piscine.RepeatAlpha("abacadaba 01!"))
+}`,
+                    usageOutput: `abbccc$
+CCccchhhhhhhhooooooooooooooouuuuuuuuuuuuuuuuuuuuummmmmmmmmmmmmiiiiiiiii.$
+$
+abbacccaddddabbba 01!$`
                 }
             ],
             4: [
